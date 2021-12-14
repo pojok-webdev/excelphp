@@ -1,70 +1,29 @@
 <?php
-error_reporting(E_ALL ^ E_NOTICE);
-$local = true;
-$nolocal = !$local;
-if($nolocal){
-	require_once 'excel_reader2.php';
-}
-if($local){
-	require_once("padi.lib.php");
-}
-$data = new Spreadsheet_Excel_Reader("pelanggan.2021.11.xls");
-//$data = new Spreadsheet_Excel_Reader("example.xls");
+	error_reporting(E_ALL ^ E_NOTICE);
+	$local = false;$nolocal = !$local;
+	if($nolocal){
+		require_once 'excel_reader2.php';
+		$data = new Spreadsheet_Excel_Reader("example.xls");
+	}
+	if($local){
+		require_once("padi.lib.php");
+		$data = new Spreadsheet_Excel_Reader("pelanggan.2021.11.xls");
+	}
 ?>
 <html>
-<head>
-<style>
-table.excel {
-	border-style:ridge;
-	border-width:1;
-	border-collapse:collapse;
-	font-family:sans-serif;
-	font-size:12px;
-}
-table.excel thead th, table.excel tbody th {
-	background:#CCCCCC;
-	border-style:ridge;
-	border-width:1;
-	text-align: center;
-	vertical-align:bottom;
-}
-table.excel tbody th {
-	text-align:center;
-	width:20px;
-}
-table.excel tbody td {
-	vertical-align:bottom;
-}
-table.excel tbody td {
-    padding: 0 3px;
-	border: 1px solid #EEEEEE;
-}
-</style>
-</head>
-
-<body>
-
-<?php 
-$user = array(
-	12=>'dhoni',
-	14=>'Yudi',
-	40=>'Thomas',
-	46=>'Retno',
-	49=>'putra',
-	55=>'Asyhari',
-	62=>'Endy',
-	68=>'Fajar',
-	95=>'Andry',
-	96=>'Dhita'
-);
-if($nolocal){
-echo $data->dump(false,false); 
-}
-?>
-<?php 
-if($local){
-$data->import(false,false,0,'excel');
-}
-?>
-</body>
+	<head>
+		<link rel="stylesheet" href="index.css" />
+	</head>
+	<body>
+		<?php 
+			if($nolocal){
+				echo $data->dump(false,false); 
+			}
+		?>
+		<?php 
+			if($local){
+				$data->import(false,false,3,'excel');
+			}
+		?>
+	</body>
 </html>
